@@ -282,22 +282,19 @@ export const ImageInspectionPage: React.FC = () => {
               <button
                 disabled={!selectedFile || analyzing}
                 onClick={handleAnalyze}
-                className={`w-full flex items-center justify-center gap-2 rounded-xl py-3.5 text-xs font-bold uppercase tracking-wider transition-all shadow-lg ${
+                className={`w-full flex items-center justify-center gap-2 rounded-lg py-2.5 text-xs font-semibold transition-colors ${
                   !selectedFile || analyzing
                     ? 'bg-slate-800 text-slate-500 cursor-not-allowed border border-slate-700'
-                    : 'bg-gradient-to-r from-cyan-500 via-blue-500 to-indigo-600 text-slate-950 hover:brightness-110 shadow-cyan-500/25 active:scale-98'
+                    : 'bg-cyan-600 text-white hover:bg-cyan-500'
                 }`}
               >
                 {analyzing ? (
                   <>
-                    <div className="h-4 w-4 animate-spin rounded-full border-2 border-slate-950 border-t-transparent" />
-                    <span>Executing YOLO26 Inference...</span>
+                    <div className="h-3.5 w-3.5 animate-spin rounded-full border-2 border-white border-t-transparent" />
+                    <span>Processing Image...</span>
                   </>
                 ) : (
-                  <>
-                    <Sparkles className="h-4 w-4" />
-                    <span>Run Road Damage Analysis</span>
-                  </>
+                  <span>Analyze Image</span>
                 )}
               </button>
             </div>
@@ -307,29 +304,29 @@ export const ImageInspectionPage: React.FC = () => {
         /* Results View */
         <div className="space-y-6">
           {/* Top Results Header Banner with Quick Actions */}
-          <div className="flex flex-wrap items-center justify-between gap-4 rounded-xl border border-slate-800 bg-slate-900/90 p-4 shadow-xl">
+          <div className="flex flex-wrap items-center justify-between gap-3 rounded-xl border border-slate-800 bg-slate-900 p-4">
             <div>
               <div className="flex items-center gap-2">
-                <span className="text-xs font-bold text-cyan-400 uppercase tracking-wider">
-                  Inspection ID: {result.id.slice(0, 8)}...
+                <span className="text-xs font-semibold text-cyan-400">
+                  Inspection ID: {result.id.slice(0, 8)}
                 </span>
-                <span className="text-slate-500">•</span>
-                <span className="text-xs text-slate-300 font-medium">
+                <span className="text-slate-600">•</span>
+                <span className="text-xs text-slate-200 font-medium">
                   {result.original_filename}
                 </span>
               </div>
               <span className="text-xs text-slate-400">
-                Resolution: {result.width}×{result.height}px • Latency: {result.inference_time_ms} ms
+                Resolution: {result.width}×{result.height} • Latency: {result.inference_time_ms} ms
               </span>
             </div>
 
-            <div className="flex flex-wrap items-center gap-2.5">
+            <div className="flex flex-wrap items-center gap-2">
               <a
                 href={result.annotated_url}
                 download={`RoadVision_${result.id.slice(0, 8)}_annotated.jpg`}
-                className="flex items-center gap-1.5 rounded-lg bg-slate-800 px-3.5 py-2 text-xs font-semibold text-slate-200 hover:bg-slate-700 border border-slate-700 transition-all"
+                className="flex items-center gap-1.5 rounded-lg border border-slate-700 bg-slate-800 px-3 py-1.5 text-xs font-medium text-slate-300 hover:bg-slate-700 transition-colors"
               >
-                <Download className="h-4 w-4 text-cyan-400" />
+                <Download className="h-3.5 w-3.5 text-cyan-400" />
                 <span>Annotated Image</span>
               </a>
 
@@ -337,24 +334,24 @@ export const ImageInspectionPage: React.FC = () => {
                 href={api.getReportPdfUrl(result.id)}
                 target="_blank"
                 rel="noreferrer"
-                className="flex items-center gap-1.5 rounded-lg bg-cyan-500 px-3.5 py-2 text-xs font-bold text-slate-950 hover:bg-cyan-400 shadow-md shadow-cyan-500/20 transition-all"
+                className="flex items-center gap-1.5 rounded-lg bg-cyan-600 px-3 py-1.5 text-xs font-medium text-white hover:bg-cyan-500 transition-colors"
               >
-                <FileText className="h-4 w-4" />
+                <FileText className="h-3.5 w-3.5" />
                 <span>PDF Report</span>
               </a>
 
               <a
                 href={api.getExportDataUrl(result.id, 'csv')}
-                className="flex items-center gap-1.5 rounded-lg bg-slate-800 px-3 py-2 text-xs font-semibold text-slate-200 hover:bg-slate-700 border border-slate-700 transition-all"
+                className="flex items-center gap-1.5 rounded-lg border border-slate-700 bg-slate-800 px-3 py-1.5 text-xs font-medium text-slate-300 hover:bg-slate-700 transition-colors"
                 title="Export CSV"
               >
-                <FileSpreadsheet className="h-4 w-4 text-emerald-400" />
+                <FileSpreadsheet className="h-3.5 w-3.5 text-emerald-400" />
                 <span>CSV</span>
               </a>
 
               <button
                 onClick={handleReset}
-                className="flex items-center gap-1.5 rounded-lg border border-slate-700 bg-slate-800 px-3 py-2 text-xs font-semibold text-slate-300 hover:bg-slate-700 hover:text-white transition-all ml-2"
+                className="flex items-center gap-1.5 rounded-lg border border-slate-700 bg-slate-800 px-3 py-1.5 text-xs font-medium text-slate-300 hover:bg-slate-700 hover:text-white transition-colors"
               >
                 <RotateCcw className="h-3.5 w-3.5" />
                 <span>Inspect Another</span>

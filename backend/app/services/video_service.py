@@ -4,6 +4,7 @@ Performs frame sampling, YOLO detection, HUD telemetry overlay, EMA risk smoothi
 """
 
 import os
+import sys
 import cv2
 import time
 import shutil
@@ -239,12 +240,24 @@ class VideoService:
             df.to_csv(telemetry_path, index=False)
 
             # Convert to H.264 MP4 using ffmpeg if available, otherwise move temp_raw
-            ffmpeg_available = shutil.which("ffmpeg") is not None
+            ffmpeg_exe = shutil.which("ffmpeg")
+            if not ffmpeg_exe:
+                try:
+                    import imageio_ffmpeg
+                    ffmpeg_exe = imageio_ffmpeg.get_ffmpeg_exe()
+                except Exception:
+                    pass
+            if not ffmpeg_exe:
+                scripts_dir = os.path.dirname(sys.executable)
+                candidate = os.path.join(scripts_dir, "ffmpeg.exe" if os.name == "nt" else "ffmpeg")
+                if os.path.exists(candidate):
+                    ffmpeg_exe = candidate
+
             converted_ok = False
-            if ffmpeg_available:
+            if ffmpeg_exe:
                 try:
                     cmd = [
-                        "ffmpeg", "-y", "-i", temp_raw_path,
+                        ffmpeg_exe, "-y", "-i", temp_raw_path,
                         "-vcodec", "libx264", "-crf", "23", "-pix_fmt", "yuv420p",
                         annotated_path
                     ]

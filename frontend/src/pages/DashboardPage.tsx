@@ -108,46 +108,8 @@ export const DashboardPage: React.FC<DashboardPageProps> = ({
 
   return (
     <div className="space-y-6 p-6">
-      {/* Top Welcome / Hero Banner */}
-      <div className="relative overflow-hidden rounded-2xl border border-cyan-900/30 bg-gradient-to-r from-slate-900 via-slate-900/90 to-cyan-950/40 p-6 shadow-xl">
-        <div className="relative z-10 flex flex-col md:flex-row md:items-center justify-between gap-4">
-          <div className="space-y-1">
-            <div className="flex items-center gap-2">
-              <span className="rounded-full bg-cyan-500/20 px-2.5 py-0.5 text-[11px] font-bold text-cyan-400 border border-cyan-500/30">
-                RoadVision AI Production Dashboard
-              </span>
-              <span className="text-xs text-slate-400">Ultralytics YOLO26 Architecture</span>
-            </div>
-            <h2 className="text-2xl font-extrabold text-white">
-              Autonomous Road Damage Inspection & Severity Analytics
-            </h2>
-            <p className="text-xs text-slate-300 max-w-2xl leading-relaxed">
-              Trained on the Multisource Road Defect Dataset (MRDD 2026) across six defect classes. 
-              Upload road surface imagery or dashcam video streams to compute real-time bounding boxes, instance severities, and aggregate pavement hazard indices.
-            </p>
-          </div>
-
-          <div className="flex items-center gap-2.5 shrink-0">
-            <button
-              onClick={() => onNavigate('image-inspect')}
-              className="flex items-center gap-2 rounded-xl bg-cyan-500 px-4 py-2.5 text-xs font-bold text-slate-950 hover:bg-cyan-400 transition-all shadow-lg shadow-cyan-500/20 active:scale-95"
-            >
-              <Camera className="h-4 w-4" />
-              <span>Inspect Image</span>
-            </button>
-            <button
-              onClick={() => onNavigate('video-inspect')}
-              className="flex items-center gap-2 rounded-xl border border-slate-700 bg-slate-800/80 px-4 py-2.5 text-xs font-bold text-white hover:bg-slate-700 transition-all shadow-xs active:scale-95"
-            >
-              <Video className="h-4 w-4 text-cyan-400" />
-              <span>Inspect Video</span>
-            </button>
-          </div>
-        </div>
-      </div>
-
       {error && (
-        <div className="rounded-xl border border-rose-900/50 bg-rose-950/30 p-4 text-xs text-rose-300">
+        <div className="rounded-lg border border-rose-900/50 bg-rose-950/30 p-3 text-xs text-rose-300">
           ⚠️ {error}
         </div>
       )}
@@ -164,22 +126,22 @@ export const DashboardPage: React.FC<DashboardPageProps> = ({
         <MetricCard
           title="Damage Instances"
           value={summary?.total_detections || 0}
-          subtitle="Cumulative defect objects identified"
+          subtitle="Total defects identified"
           icon={Target}
           accentColor="blue"
         />
         <MetricCard
           title="High Severity Hazards"
           value={summary?.high_severity_detections || 0}
-          subtitle="Immediate municipal repair priority"
+          subtitle="Immediate repair priority"
           icon={ShieldAlert}
           accentColor="rose"
         />
         <MetricCard
           title="Average Confidence"
           value={summary && summary.avg_confidence > 0 ? `${(summary.avg_confidence * 100).toFixed(1)}%` : '0%'}
-          subtitle="Mean detector certainty score"
-          icon={Sparkles}
+          subtitle="Mean detector certainty"
+          icon={Activity}
           accentColor="emerald"
         />
       </div>
@@ -340,22 +302,17 @@ export const DashboardPage: React.FC<DashboardPageProps> = ({
           </div>
 
           {/* Recent Activity Table */}
-          <div className="rounded-xl border border-slate-800 bg-slate-900/90 shadow-xl overflow-hidden">
-            <div className="flex items-center justify-between border-b border-slate-800 bg-slate-950/60 p-4">
-              <div>
-                <h4 className="text-sm font-bold text-white uppercase tracking-wider">
-                  Recent Road Inspections
-                </h4>
-                <p className="text-xs text-slate-400">
-                  Latest diagnostic runs logged in persistent SQLite storage
-                </p>
-              </div>
+          <div className="rounded-xl border border-slate-800 bg-slate-900 overflow-hidden">
+            <div className="flex items-center justify-between border-b border-slate-800 px-4 py-3 bg-slate-950">
+              <h4 className="text-xs font-semibold text-slate-200 uppercase tracking-wider">
+                Recent Inspections
+              </h4>
 
               <button
                 onClick={() => onNavigate('history')}
-                className="text-xs font-semibold text-cyan-400 hover:text-cyan-300 transition-colors"
+                className="text-xs font-medium text-cyan-400 hover:text-cyan-300 transition-colors"
               >
-                View Full Audit History →
+                View All History →
               </button>
             </div>
 

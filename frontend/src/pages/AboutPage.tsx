@@ -33,20 +33,19 @@ export const AboutPage: React.FC = () => {
 
   return (
     <div className="space-y-8 p-6 max-w-6xl mx-auto">
-      {/* Title Hero */}
-      <div className="rounded-2xl border border-cyan-900/40 bg-gradient-to-r from-slate-900 via-slate-900/90 to-cyan-950/40 p-8 shadow-2xl">
+      {/* Title Header */}
+      <div className="rounded-xl border border-slate-800 bg-slate-900 p-6">
         <div className="flex items-center gap-2 mb-2">
-          <span className="rounded-full bg-cyan-500/20 px-3 py-1 text-xs font-bold text-cyan-400 border border-cyan-500/30 flex items-center gap-1.5">
-            <Sparkles className="h-3.5 w-3.5" /> Academic Project Specification
+          <span className="rounded bg-slate-800 px-2 py-0.5 text-xs font-medium text-slate-300 border border-slate-700">
+            System Architecture & Methodology
           </span>
-          <span className="text-xs text-slate-400 font-mono">Zenodo DOI: 10.5281/zenodo.15647607</span>
+          <span className="text-xs text-slate-500 font-mono">MRDD 2026</span>
         </div>
-        <h1 className="text-3xl font-black text-white tracking-tight">
-          AI-Based Road Damage Detection and Severity Assessment Using YOLO26
+        <h1 className="text-xl font-bold text-white tracking-tight">
+          Road Damage Detection and Severity Assessment
         </h1>
-        <p className="mt-2 text-sm text-slate-300 leading-relaxed max-w-3xl">
-          Automated intelligent transportation inspection system trained on the Multisource Road Defect Dataset (MRDD 2026), 
-          combining decoupled anchor-free object detection with structural civil engineering severity heuristics and temporal telemetry smoothing.
+        <p className="mt-1.5 text-xs text-slate-400 leading-relaxed max-w-3xl">
+          Platform specifications for YOLO26 defect detection, severity scoring formulation, and aggregate road condition telemetry.
         </p>
       </div>
 

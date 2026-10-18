@@ -197,15 +197,27 @@ export const InspectionDetailPage: React.FC<InspectionDetailPageProps> = ({
         />
       ) : (
         <div className="space-y-6">
-          <div className="rounded-xl border border-slate-800 bg-slate-950 p-4 shadow-2xl flex flex-col items-center">
-            <span className="text-xs font-semibold text-slate-400 uppercase tracking-wider self-start mb-2">
-              Annotated Video Telemetry Stream
-            </span>
-            <video
-              src={inspection.annotated_url}
-              controls
-              className="max-h-[520px] w-full rounded-lg bg-black"
-            />
+          <div className="rounded-xl border border-slate-800 bg-slate-900 p-4 shadow-xl">
+            <div className="flex items-center justify-between border-b border-slate-800 pb-3 mb-3">
+              <span className="text-xs font-semibold text-slate-200 uppercase tracking-wider">
+                Annotated Video Stream
+              </span>
+              <span className="text-[11px] font-mono text-slate-400">
+                {inspection.width}×{inspection.height} • {inspection.fps ? `${inspection.fps.toFixed(1)} FPS` : '25 FPS'}
+              </span>
+            </div>
+            <div className="relative overflow-hidden rounded-lg bg-black flex items-center justify-center">
+              <video
+                key={inspection.annotated_url}
+                controls
+                playsInline
+                preload="auto"
+                className="w-full max-h-[520px] rounded-lg bg-black object-contain"
+              >
+                <source src={inspection.annotated_url} type="video/mp4" />
+                Your browser does not support HTML5 video playback.
+              </video>
+            </div>
           </div>
 
           {inspection.frame_timeline && (

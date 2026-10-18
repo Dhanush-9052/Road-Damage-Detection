@@ -1,5 +1,5 @@
 import React from 'react';
-import { Camera, Video, Activity, Sparkles } from 'lucide-react';
+import { Camera, Video, Activity } from 'lucide-react';
 import type { ModelInfo } from '../types';
 
 interface HeaderProps {
@@ -15,59 +15,59 @@ export const Header: React.FC<HeaderProps> = ({
 }) => {
   const pageTitles: Record<string, { title: string; subtitle: string }> = {
     dashboard: {
-      title: 'Infrastructure Overview Dashboard',
-      subtitle: 'Real-time telemetry, defect distribution, and municipal road condition index',
+      title: 'Dashboard Overview',
+      subtitle: 'System metrics, defect distribution, and network condition status',
     },
     'image-inspect': {
-      title: 'Single Image Road Damage Inspection',
-      subtitle: 'High-resolution defect localization, bounding-box regression, and severity assessment',
+      title: 'Image Inspection',
+      subtitle: 'Upload pavement photos for defect detection and severity assessment',
     },
     'video-inspect': {
-      title: 'Continuous Video Telemetry & HUD Processing',
-      subtitle: 'Sampled frame inference with exponential moving average (EMA) road risk smoothing',
+      title: 'Video Inspection',
+      subtitle: 'Process inspection footage and review annotated video telemetry',
     },
     history: {
-      title: 'Inspection Audit Records',
-      subtitle: 'Persistent SQLite database of past diagnostic inspections and downloadable reports',
+      title: 'Inspection History',
+      subtitle: 'Log of diagnostic inspections and downloadable audit reports',
     },
     analytics: {
-      title: 'Multi-Perspective Defect Analytics',
-      subtitle: 'Comprehensive distribution trends across pavement materials and sensing platforms',
+      title: 'Defect Analytics',
+      subtitle: 'Class breakdown, severity trends, and historical distributions',
     },
     about: {
-      title: 'Academic Methodology & Architecture',
-      subtitle: 'MRDD 2026 dataset provenance, YOLO26 neural network evaluation, and risk equations',
+      title: 'System Specifications',
+      subtitle: 'Model architecture, defect classes, and scoring methodology',
     },
   };
 
   const current = pageTitles[activeTab] || {
     title: 'RoadVision AI',
-    subtitle: 'AI-powered road damage inspection platform',
+    subtitle: 'Road damage inspection dashboard',
   };
 
   return (
-    <header className="sticky top-0 z-20 flex h-20 items-center justify-between border-b border-slate-800/80 bg-slate-950/80 px-6 backdrop-blur-xl">
+    <header className="sticky top-0 z-20 flex h-16 items-center justify-between border-b border-slate-800 bg-slate-950 px-6">
       <div>
         <div className="flex items-center gap-2">
-          <h1 className="text-xl font-bold tracking-tight text-white">
+          <h1 className="text-base font-semibold tracking-tight text-white">
             {current.title}
           </h1>
-          <span className="hidden md:inline-flex items-center gap-1 rounded-md bg-cyan-950/60 px-2 py-0.5 text-[10px] font-bold text-cyan-400 border border-cyan-800/40">
-            <Sparkles className="h-3 w-3" /> MRDD 2026
+          <span className="hidden md:inline-flex items-center rounded bg-slate-800 px-2 py-0.5 text-[10px] font-medium text-slate-300 border border-slate-700">
+            MRDD 2026
           </span>
         </div>
-        <p className="text-xs text-slate-400 line-clamp-1 mt-0.5">
+        <p className="text-xs text-slate-400 line-clamp-1">
           {current.subtitle}
         </p>
       </div>
 
       <div className="flex items-center gap-3">
         {/* Model status pill */}
-        <div className="hidden lg:flex items-center gap-2 rounded-full border border-slate-800 bg-slate-900/80 px-3 py-1 text-xs">
-          <Activity className="h-3.5 w-3.5 text-cyan-400 animate-pulse" />
-          <span className="text-slate-300 font-medium">Model:</span>
-          <span className="font-mono text-cyan-300">YOLO26s</span>
-          <span className="text-slate-500">•</span>
+        <div className="hidden lg:flex items-center gap-2 rounded-md border border-slate-800 bg-slate-900 px-3 py-1 text-xs">
+          <Activity className="h-3.5 w-3.5 text-cyan-400" />
+          <span className="text-slate-400">Model:</span>
+          <span className="font-mono text-slate-200">YOLO26s</span>
+          <span className="text-slate-600">•</span>
           <span className="font-mono text-emerald-400">
             {modelInfo?.device?.toUpperCase() || 'CPU'}
           </span>
@@ -76,17 +76,17 @@ export const Header: React.FC<HeaderProps> = ({
         {/* Quick actions */}
         <button
           onClick={() => setActiveTab('image-inspect')}
-          className="flex items-center gap-1.5 rounded-xl bg-gradient-to-r from-cyan-500 to-blue-600 px-3.5 py-2 text-xs font-bold text-slate-950 hover:from-cyan-400 hover:to-blue-500 transition-all shadow-md shadow-cyan-500/20 active:scale-95"
+          className="flex items-center gap-1.5 rounded-lg bg-cyan-600 px-3 py-1.5 text-xs font-medium text-white hover:bg-cyan-500 transition-colors shadow-xs"
         >
-          <Camera className="h-4 w-4" />
+          <Camera className="h-3.5 w-3.5" />
           <span className="hidden sm:inline">Inspect Image</span>
         </button>
 
         <button
           onClick={() => setActiveTab('video-inspect')}
-          className="flex items-center gap-1.5 rounded-xl border border-slate-700 bg-slate-800/80 px-3.5 py-2 text-xs font-bold text-white hover:bg-slate-700 transition-all shadow-xs active:scale-95"
+          className="flex items-center gap-1.5 rounded-lg border border-slate-700 bg-slate-800 px-3 py-1.5 text-xs font-medium text-slate-200 hover:bg-slate-700 transition-colors"
         >
-          <Video className="h-4 w-4 text-cyan-400" />
+          <Video className="h-3.5 w-3.5 text-cyan-400" />
           <span className="hidden sm:inline">Inspect Video</span>
         </button>
       </div>

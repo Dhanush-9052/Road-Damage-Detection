@@ -32,14 +32,11 @@ export const TimelineChart: React.FC<TimelineChartProps> = ({ timeline }) => {
   }
 
   return (
-    <div className="rounded-xl border border-slate-800 bg-slate-900/90 p-5 shadow-xl">
-      <div className="flex flex-wrap items-center justify-between gap-2 border-b border-slate-800 pb-3 mb-4">
+    <div className="rounded-xl border border-slate-800 bg-slate-900 p-4 shadow-xl">
+      <div className="flex flex-wrap items-center justify-between gap-2 border-b border-slate-800 pb-3 mb-3">
         <div>
-          <span className="text-xs font-semibold text-slate-400 uppercase tracking-wider">
-            Temporal Video Telemetry
-          </span>
-          <h4 className="text-sm font-bold text-white">
-            Smoothed Road Risk Score Progression Over Video Run
+          <h4 className="text-xs font-semibold text-slate-200 uppercase tracking-wider">
+            Risk & Defect Timeline
           </h4>
         </div>
         <div className="flex items-center gap-4 text-xs">

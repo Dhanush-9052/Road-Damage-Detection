@@ -90,23 +90,20 @@ export const AnalyticsPage: React.FC<AnalyticsPageProps> = ({
   return (
     <div className="space-y-6 p-6">
       {/* Top Banner */}
-      <div className="rounded-xl border border-slate-800 bg-slate-900/90 p-5 shadow-xl">
+      <div className="rounded-xl border border-slate-800 bg-slate-900 p-4">
         <div className="flex flex-wrap items-center justify-between gap-4">
           <div>
-            <span className="text-xs font-semibold text-cyan-400 uppercase tracking-wider">
-              Municipal Civil Infrastructure Intelligence
-            </span>
-            <h2 className="text-xl font-extrabold text-white mt-1">
-              Cross-Inspection Defect Distribution & Severity Telemetry
+            <h2 className="text-sm font-semibold text-white">
+              Inspection Analytics & Distribution Trends
             </h2>
             <p className="text-xs text-slate-400 mt-0.5">
-              Persistent empirical database records across asphalt, concrete, and brick pavement sectors
+              Aggregate statistics compiled from completed road inspections
             </p>
           </div>
 
           <div className="flex items-center gap-2">
-            <span className="rounded-full bg-slate-800 px-3 py-1 text-xs text-slate-300 border border-slate-700 font-mono">
-              Total Inspections: {summary?.total_inspections || 0}
+            <span className="rounded bg-slate-800 px-2.5 py-1 text-xs text-slate-300 border border-slate-700 font-mono">
+              Total Records: {summary?.total_inspections || 0}
             </span>
           </div>
         </div>
